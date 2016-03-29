@@ -62,8 +62,8 @@ public class StringConversor {
                 list.add(new Element(stringBuilder.substring(i, i+1)));
                 
                 if (str.charAt(i)==')'){
-                    if (i<str.length()-1){
-                        if ((str.charAt(i+1)>='0' && str.charAt(i+1)<='9') || str.charAt(i-1)=='.' || str.charAt(i-1)=='('){
+                    if (i+1<str.length()){
+                        if ((str.charAt(i+1)>='0' && str.charAt(i+1)<='9') || str.charAt(i+1)=='.' || str.charAt(i+1)=='('){
                             list.add(new Element("*"));
                         }
                     }

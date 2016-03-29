@@ -25,23 +25,29 @@ public class CalculatorEngine {
         double a, b;
         Element el = new Element("1");
         
-        if (c=='~'){
-            a = values.pop().getValue();
-            el.setValue(-a);
-        }
-        else if (c=='#'){
-            a = values.pop().getValue();
-            el.setValue(a);
-        }
-        else{
-            b = values.pop().getValue();
-            a = values.pop().getValue();
+        try{
+        
+            if (c=='~'){
+                a = values.pop().getValue();
+                el.setValue(-a);
+            }
+            else if (c=='#'){
+                a = values.pop().getValue();
+                el.setValue(a);
+            }
+            else{
+                b = values.pop().getValue();
+                a = values.pop().getValue();
 
-            if (c=='*') el.setValue(a*b);
-            if (c=='/') el.setValue(a/b);
-            if (c=='+') el.setValue(a+b);
-            if (c=='-') el.setValue(a-b);
-            if (c=='^') el.setValue(Math.pow(a,b));
+                if (c=='*') el.setValue(a*b);
+                if (c=='/') el.setValue(a/b);
+                if (c=='+') el.setValue(a+b);
+                if (c=='-') el.setValue(a-b);
+                if (c=='^') el.setValue(Math.pow(a,b));
+            }
+        
+        } catch (Exception e){
+            System.out.println("Invalid expression");
         }
         
         values.push(el);
@@ -50,6 +56,10 @@ public class CalculatorEngine {
     public double calculate(LinkedList<Element> polish){
         
         values = new Stack<>();
+        
+        double ans = 0.0;
+        
+        try{
         
         while(!polish.isEmpty()){
             if (polish.getFirst().isOperator()){
@@ -61,7 +71,15 @@ public class CalculatorEngine {
             polish.removeFirst();
         }
         
-        return values.peek().getValue();
+        ans = values.peek().getValue();
+        
+        } catch(Exception e){
+            System.out.println("Invalid expression");
+            
+            ans = Double.NaN;
+        }
+        
+        return ans;
     }
     
 }

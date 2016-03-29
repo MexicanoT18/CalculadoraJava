@@ -44,6 +44,8 @@ public class ToPolishConversor {
                 
                 op = parenthetic.getFirst().getOperator();
                 
+                try{
+                
                 if (op==')'){
                     while(operators.peek().getOperator()!='('){
                         polish.add(operators.pop());
@@ -59,6 +61,16 @@ public class ToPolishConversor {
                         polish.add(operators.pop());
                     }
                     operators.push(parenthetic.getFirst());
+                }
+                
+                } catch(Exception e){
+                    System.out.println("Invalid expression");
+                    
+                    polish.clear();
+                    Element el = new Element("1");
+                    el.setValue(Double.NaN);
+                    polish.add(el);
+                    return polish;
                 }
             }
             else{
