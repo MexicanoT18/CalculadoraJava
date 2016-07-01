@@ -48,16 +48,7 @@ public class Display extends JPanel{
     }
     
     public void replaceString(String str){
-        int n = str.length();
-        while(n>1){
-            if (str.charAt(n-1)=='0') n--;
-            else if (str.charAt(n-1)=='.'){
-                n--;
-                break;
-            }
-            else break;
-        }
-        textField.setText(str.substring(0,n));
+        textField.setText(str);
     }
     
     public void clearString(){

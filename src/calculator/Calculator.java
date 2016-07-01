@@ -41,8 +41,19 @@ public class Calculator {
         
         parenthetic = stringConversor.convert(str);
         polish = toPolishConversor.convert(parenthetic);
-        return Double.toString(calculatorEngine.calculate(polish));
+        return removeZeros(Double.toString(calculatorEngine.calculate(polish)));
         
+    }
+    
+    public String removeZeros(String str){
+        int n = str.length();
+        
+        int pointPos = 0, zeroPos = n-1;
+        while(pointPos < n && str.charAt(pointPos)!='.') pointPos++;
+        while(zeroPos > pointPos && str.charAt(zeroPos)=='0') zeroPos--;
+        
+        if (str.charAt(zeroPos)=='.') zeroPos--;
+        return str.substring(0, zeroPos+1);
     }
     
 }
